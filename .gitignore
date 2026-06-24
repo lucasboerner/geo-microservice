@@ -1,4 +1,5 @@
 .idea
+config/reference.php
 
 ###> symfony/framework-bundle ###
 /.env.local
