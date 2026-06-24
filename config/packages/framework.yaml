@@ -14,7 +14,12 @@ framework:
                 base_uri: '%env(PHOTON_URL)%'
                 headers:
                     Accept: 'application/json'
-                    User-Agent: 'geo-api/%env(APP_ENV)%'
+                    User-Agent: 'geo-microservice/%env(APP_ENV)%'
+            osrm.client:
+                base_uri: '%env(OSRM_URL)%'
+                headers:
+                    Accept: 'application/json'
+                    User-Agent: 'geo-microservice/%env(APP_ENV)%'
 
 when@test:
     framework:
