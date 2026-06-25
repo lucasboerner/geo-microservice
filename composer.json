@@ -2,7 +2,7 @@
     "name": "lucasboerner/geo-microservice",
     "description": "Self-hosted geocoding + routing gateway (Photon + OSRM) on Symfony / API Platform.",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
