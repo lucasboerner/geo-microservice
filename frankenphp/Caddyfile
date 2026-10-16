@@ -4,6 +4,9 @@
 	{$CADDY_GLOBAL_OPTIONS}
 
 	frankenphp {
+		# Shed load instead of queueing forever: a request still waiting for a free
+		# PHP thread after this long is rejected rather than held until the client times out.
+		max_wait_time {$FRANKENPHP_MAX_WAIT_TIME:10s}
 		{$FRANKENPHP_CONFIG}
 	}
 }
@@ -34,8 +37,12 @@
 	php @frontController {
 		{$FRANKENPHP_SITE_CONFIG}
 
+		# Each request holds a worker while it waits on Photon/OSRM, so the worker
+		# count — not the CPU — caps concurrency. FrankenPHP's default (2x CPUs) is
+		# sized for CPU-bound apps; this gateway mostly waits on I/O.
 		worker {
 			file ./public/index.php
+			num {$FRANKENPHP_WORKERS:32}
 			{$FRANKENPHP_WORKER_CONFIG}
 		}
 	}

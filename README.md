@@ -175,6 +175,8 @@ annotated template.
 | `ENABLE_REDIS`      | `false`                | **The only Redis knob.** `true` starts the bundled `redis` service and caches there; otherwise a filesystem cache is used (no extra service). |
 | `API_KEY`           | *(unset)*              | If set, every request except `/health` must send it via `X-API-Key`. Empty = open.       |
 | `CORS_ALLOW_ORIGIN` | `*`                    | CORS origin(s) allowed for browser autocomplete.                                         |
+| `FRANKENPHP_WORKERS` | `32`                  | PHP workers in the gateway = max. requests in flight. Each one waits on Photon/OSRM, so raise this (not CPUs) for throughput. A few MB RAM each. |
+| `FRANKENPHP_MAX_WAIT_TIME` | `10s`           | Reject a request that waited this long for a free worker, instead of queueing until the client times out. |
 | `PHOTON_URL`        | `http://photon:2322`   | Internal Photon URL. Set automatically under Compose; only change for bare-metal setups. |
 | `OSRM_URL`          | `http://osrm:5000`     | Internal OSRM URL. Set automatically under Compose; only change for bare-metal setups.   |
 

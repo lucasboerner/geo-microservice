@@ -10,6 +10,11 @@ services:
       REGION: ${REGION:-de}
       # Cache backend toggle (true -> Redis service, anything else -> filesystem).
       ENABLE_REDIS: ${ENABLE_REDIS:-false}
+      # PHP worker pool. Every request holds a worker while it waits on Photon/OSRM,
+      # so this — not the CPU — caps how many requests run at once. Requests that
+      # wait longer than FRANKENPHP_MAX_WAIT_TIME for a free worker are rejected.
+      FRANKENPHP_WORKERS: ${FRANKENPHP_WORKERS:-32}
+      FRANKENPHP_MAX_WAIT_TIME: ${FRANKENPHP_MAX_WAIT_TIME:-10s}
       # Internal upstreams on the compose network (override the public demos in .env).
       PHOTON_URL: http://photon:2322
       OSRM_URL: http://osrm:5000
